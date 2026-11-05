@@ -224,8 +224,8 @@ main { max-width: 1400px; margin: auto; padding: 18px clamp(16px, 4vw, 48px) 60p
 .actions { text-align: right; white-space: nowrap; }
 
 /* ---------- bars ---------- */
-.bars { display: flex; align-items: flex-end; gap: clamp(6px, 1.5vw, 16px); padding: 28px 0 30px; }
-.bar { flex: 1; height: 100%; position: relative; background: none; border: 0; padding: 0; display: flex; align-items: flex-end; border-radius: 12px 12px 4px 4px; }
+.bars { display: flex; align-items: flex-end; justify-content: center; gap: clamp(6px, 1.5vw, 16px); padding: 28px 0 30px; }
+.bar { flex: 1; max-width: 120px; height: 100%; position: relative; background: none; border: 0; padding: 0; display: flex; align-items: flex-end; border-radius: 12px 12px 4px 4px; }
 .bar:hover:not(:disabled) { transform: none; }
 .bar-fill { width: 100%; height: var(--h); border-radius: 12px 12px 4px 4px; transform-origin: bottom;
   background: linear-gradient(180deg, var(--gold2), var(--gold) 30%, var(--rose) 100%);

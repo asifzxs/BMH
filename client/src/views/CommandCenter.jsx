@@ -59,11 +59,22 @@ export default function CommandCenter() {
       </div>
 
       <div className="grid-2">
-        <div className="card">
-          <div className="card-head"><h3>Sales by outlet</h3><span className="lbl">Click a bar to drill into daily bills</span></div>
-          <Bars format={RL} onPick={(x) => setPick(x.label)}
-            items={d.outlets.map((o) => ({ label: o.name, short: o.name.split(' ')[0], value: o.value }))} />
-        </div>
+        {d.outlets.length > 1 ? (
+          <div className="card">
+            <div className="card-head"><h3>Sales by outlet</h3><span className="lbl">Click a bar to drill into daily bills</span></div>
+            <Bars format={RL} onPick={(x) => setPick(x.label)}
+              items={d.outlets.map((o) => ({ label: o.name, short: o.name.split(' ')[0], value: o.value }))} />
+          </div>
+        ) : (
+          // One outlet in scope: a single bar says nothing, so chart its last 7 days instead.
+          <div className="card">
+            <div className="card-head">
+              <h3>{d.outlets[0]?.name ?? 'Outlet'} · daily sales</h3>
+              {d.outlets[0] && <button className="ghost" onClick={() => setPick(d.outlets[0].name)}>See daily bills</button>}
+            </div>
+            <Bars format={RL} items={d.trend.map((t) => ({ label: t.day, short: shortDate(t.day), value: t.value }))} />
+          </div>
+        )}
         <div className="card center-stack">
           <h3>Delivery health</h3>
           <Gauge value={d.otif} label="On-time in-full" />
